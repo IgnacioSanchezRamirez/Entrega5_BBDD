@@ -2,11 +2,15 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
 const options = { logging: false};
-const sequelize = new Sequelize("sqlite:db.sqlite", options);
+const sequelize = new Sequelize("sqlite:db.sqlite", options); //conexion con la base de datos, inicializamos
+//especificamos el nombre del fichero de la base de datos
 
-class User extends Model {}
+
+//entidades de la BBDD
+class User extends Model {} 
 class Quiz extends Model {}
 
+//Definicion BBDD
 User.init(
   { name: {
       type: DataTypes.STRING,
