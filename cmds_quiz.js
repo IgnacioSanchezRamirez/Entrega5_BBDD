@@ -1,5 +1,6 @@
 
 const {User, Quiz} = require("./model.js").models;
+const sequelize = require("./model.js");
 
 // Show all quizzes in DB including <id> and <author>
 exports.list = async (rl) =>  {
@@ -83,3 +84,25 @@ exports.delete = async (rl) => {
   rl.log(`  ${id} deleted from DB`);
 }
 
+
+
+exports.play = async (rl) => {
+  
+  let quizzes = await Quiz.findAll({order: sequelize.random()});
+  let score = 0;
+
+
+  for (var q of quizzes){
+    let res = await rl.questionP(q.question);
+    //if (res === q.answer){
+    if (res.toLowerCase().trim()===q.answer.toLowerCase().trim()){
+      rl.log(`The answer "${res}" is right!`);
+      score++;
+    }else{
+      rl.log(`The answer "${res}" is wrong!`);
+      break;
+    }
+  }
+ rl.log(`Score: "${score}"`);
+
+}

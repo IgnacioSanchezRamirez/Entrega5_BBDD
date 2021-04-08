@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable(
-      'Scores',
+      'Users',
       { id: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -11,23 +11,11 @@ module.exports = {
           autoIncrement: true,
           unique: true
         },
-        wins: { 
-          type: Sequelize.INTEGER,
-
+        name: { 
+          type: Sequelize.STRING,
+          unique: true
         },
-        
-        userId:{
-          type: Sequelize.INTEGER,
-          references:{
-            model:"Users",
-            key: "id"
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE'
-        },
-
-
-
+        age: Sequelize.INTEGER,
         createdAt: {
           type: Sequelize.DATE,
           allowNull: false
@@ -44,6 +32,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Scores');
+        return queryInterface.dropTable('Users');
   }
 };

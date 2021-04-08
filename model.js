@@ -9,6 +9,7 @@ const sequelize = new Sequelize("sqlite:db.sqlite", options); //conexion con la 
 //entidades de la BBDD
 class User extends Model {} 
 class Quiz extends Model {}
+class Score extends Model {}
 
 //Definicion BBDD
 User.init(
@@ -43,6 +44,27 @@ Quiz.init(
   { sequelize }
 );
 
+Score.init(//creamos el modelo score
+  {wins:{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      min: { args:   [0], msg: "Wins: less than 0"},
+    }
+  }},
+  { sequelize }
+);
+
+Score.belongsTo(User, {
+  as: 'owner',
+  foreignKey: 'userId',
+   onDelete: 'CASCADE'
+});
+User.hasMany(Score, {
+  as: 'scores',
+  foreignKey: 'userId',
+  
+});
 
 Quiz.belongsTo(User, {
   as: 'author', 
