@@ -28,7 +28,8 @@ exports.help = (rl) =>
 // Show all users in DB
 exports.list = async (rl) => {
 
-  let users = await User.findAll();
+  let users = await User.findAll();//cojo user del modelo y hago un find
+  //lo muestro por pantalla
   
   users.forEach( u => rl.log(`  ${u.name} is ${u.age} years old`));
 }
@@ -42,7 +43,7 @@ exports.create = async (rl) => {
   let age = await rl.questionP("Enter age");
   if (!age) throw new Error("Response can't be empty!");
 
-  await User.create( 
+  await User.create( //creo nuevo usuario con nombre y edad
     { name, age }
   );
   rl.log(`   ${name} created with ${age} years`);
@@ -54,7 +55,7 @@ exports.read = async (rl) => {
   let name = await rl.questionP("Enter name");
   if (!name) throw new Error("Response can't be empty!");
 
-  let user = await User.findOne({
+  let user = await User.findOne({//buscar uno con findOne
     where: {name},
     include: [
       { model: Quiz, as: 'posts'},
@@ -84,6 +85,7 @@ exports.update = async (rl) => {
   let old_name = await rl.questionP("Enter name to update");
   if (!old_name) throw new Error("Response can't be empty!");
 
+  //guardo en la variable nombre el nuevo nombre introducido
   let name = await rl.questionP("Enter new name");
   if (!name) throw new Error("Response can't be empty!");
 

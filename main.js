@@ -4,20 +4,25 @@ const quiz = require("./cmds_quiz.js");
 const favs = require("./cmds_favs.js");
 const readline = require('readline');
 
+
+//paquete readline
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
   prompt: "> "
 });
+//primer metodo
 rl.log = (msg) => console.log(msg);  // Add log to rl interface
+//segundo metodo
 rl.questionP = function (string) {   // Add questionP to rl interface
   return new Promise ( (resolve) => {
     this.question(`  ${string}: `, (answer) => resolve(answer.trim()))
-  })
+  })//muestra la info y epsera que el usuario escriba la respuesta y lo introduzca por teclado
 };
 
 rl.prompt();
 
+//diferentes comandos que puede introducir el usuario
 rl.on('line', async (line) => {
   try{
     let cmd = line.trim()
@@ -25,7 +30,7 @@ rl.on('line', async (line) => {
     if      ('' ===cmd)   {}
     else if ('h' ===cmd)  { user.help(rl);}
 
-    else if (['lu', 'ul', 'u'].includes(cmd)) { await user.list(rl);}
+    else if (['lu', 'ul', 'u'].includes(cmd)) { await user.list(rl);} //voy a user.list que es una funcion de user
     else if (['cu', 'uc'].includes(cmd))      { await user.create(rl);}
     else if (['ru', 'ur', 'r'].includes(cmd)) { await user.read(rl);}
     else if (['uu'].includes(cmd))            { await user.update(rl);}
