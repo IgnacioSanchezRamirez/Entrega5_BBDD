@@ -127,7 +127,7 @@ exports.listScore = async (rl) => {
   
 
   for(s of scores){
-    rl.log(`${sowner.name}|${s.wins}|${s.createdAd.toUTCString()}`);
+    rl.log(`${s.owner.name}|${s.wins}|${s.createdAt.toUTCString()}`);
   }
   
 } 

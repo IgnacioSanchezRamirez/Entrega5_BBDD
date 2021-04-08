@@ -44,7 +44,8 @@ Quiz.init(
   { sequelize }
 );
 
-Score.init(//creamos el modelo score
+//Definimos el modelo Score
+Score.init(
   {wins:{
     type: DataTypes.INTEGER,
     allowNull: false,
