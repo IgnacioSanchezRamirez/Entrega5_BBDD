@@ -47,7 +47,7 @@ rl.on('line', async (line) => {
     else if (['df', 'fd'].includes(cmd))      { await favs.delete(rl);}
 
     else if (['p'].includes(cmd))      { await quiz.play(rl);}//jugar con todas las preguntas en aleatorio
-    else if (['ls'].includes(cmd))      { await quiz.play(rl);}//list score de la BBDD
+    else if (['ls'].includes(cmd))      { await quiz.listScore(rl);}//list score de la BBDD
 
     else if ('e'===cmd)  { rl.log('Bye!'); process.exit(0);}
     else                 {  rl.log('UNSUPPORTED COMMAND!');

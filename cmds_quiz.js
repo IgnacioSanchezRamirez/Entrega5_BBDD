@@ -1,5 +1,5 @@
 
-const {User, Quiz} = require("./model.js").models;
+const {User, Quiz, Score} = require("./model.js").models;
 const sequelize = require("./model.js");
 
 // Show all quizzes in DB including <id> and <author>
@@ -105,4 +105,29 @@ exports.play = async (rl) => {
   }
  rl.log(`Score: "${score}"`);
 
+
+ let name = await rl.questionP('Escribe tu nombre de usuario');
+
+ let user = await User.findOne({where: {name: name}});
+
+ if(!user){
+   user = User.create({name, age:0});
+ }
+ await Score.create({wins: score, userId: user.id});
+
 }
+
+exports.listScore = async (rl) => {
+  let scores = await Score.findAll({
+    include: {model: User, as: 'owner'
+  },
+  order: [['wins', 'DESC']]
+  }
+  );
+  
+
+  for(s of scores){
+    rl.log(`${sowner.name}|${s.wins}|${s.createdAd.toUTCString()}`);
+  }
+  
+} 
