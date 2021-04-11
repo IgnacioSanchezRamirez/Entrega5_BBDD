@@ -109,9 +109,12 @@ exports.play = async (rl) => {
  let name = await rl.questionP('Escribe tu nombre de usuario');
 
  let user = await User.findOne({where: {name: name}});
+ //let user = await User.findOne({name: name});
 
  if(!user){
-   user = User.create({name, age:0});
+   
+   user = await User.create({name, age: 0});
+   console.log("Nuevo usuario creado");
  }
  await Score.create({wins: score, userId: user.id});
 
@@ -122,8 +125,7 @@ exports.listScore = async (rl) => {
     include: {model: User, as: 'owner'
   },
   order: [['wins', 'DESC']]
-  }
-  );
+  });
   
 
   for(s of scores){

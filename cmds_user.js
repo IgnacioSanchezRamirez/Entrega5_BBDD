@@ -22,6 +22,9 @@ exports.help = (rl) =>
     > cf | fc        ## favourite: create
     > df | fd        ## favourite: delete
     >
+    > p              ## quiz: jugar con todas las preguntas en aleatorio
+    > ls             ## bbdd: list score de la BBDD
+    >
     > e              ## exit & return to shell`
   )
 
@@ -45,6 +48,7 @@ exports.create = async (rl) => {
 
   await User.create( //creo nuevo usuario con nombre y edad
     { name, age }
+    
   );
   rl.log(`   ${name} created with ${age} years`);
 }
