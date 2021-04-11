@@ -129,6 +129,8 @@ exports.listScore = async (rl) => {
   
 
   for(s of scores){
+    console.log("Puntuaciones almacenadas en la BBDD ordenadas de mayor a menor")
+    console.log("Nombre usuario | Puntuacion obtenida | Fecha");
     rl.log(`${s.owner.name}|${s.wins}|${s.createdAt.toUTCString()}`);
   }
   
